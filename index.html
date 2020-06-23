@@ -1,45 +1,80 @@
 <script>
 
-	function computerPlay(playerSelection, computerSelection){
-
-		if(typeof playerSelection !== 'string' || typeof computerSelection !== 'string' ){
+//use this if you want to screen for string input later
+	/*if(typeof playerSelection !== 'string' || typeof computerSelection !== 'string' ){
 			return "Bad input, try again";
 		}
+		*/
+
+//returns a random number between 0 and 2 and converts it to a move
+function computerPlay(){
+			let randomNumber = Math.floor(Math.random() * 3);
+			switch (randomNumber){
+				case 0:
+				return "rock";
+				break;
+				case 1:
+				return "paper";
+				break;
+				case 2: 
+				return "scissors";
+				break;
+
+			}
+}
+
+function playRound(playerSelection, computerSelection){
 		playerSelection = playerSelection.toLowerCase();
-		computerSelection = computerSelection.toLowerCase();
 		if(playerSelection === "rock" && computerSelection === "scissors"||playerSelection === "paper" && computerSelection === "rock" || playerSelection === "scissors" && computerSelection == "paper"){
-			return `You win!${playerSelection} beats ${computerSelection}.`;
+			return "win";
 		} else if (playerSelection == computerSelection){
-			return `You chose ${playerSelection} and computer chose ${computerSelection}. It's a tie!`
+			return "tie";
 		}
-		else {
-			return `You lose! ${computerSelection} beats ${playerSelection}.`;
+		else {		
+			return "lose";
 		}
 
 	}
 
-	function game () {
+//`You win!${playerSelection} beats ${computerSelection}.`;
+//`You chose ${playerSelection} and computer chose ${computerSelection}. It's a tie!`
+//`You lose! ${computerSelection} beats ${playerSelection}.`;
+
+function game () {
 		let userScore = 0;
 		let computerScore = 0;
 		let playerMove = "";
 		let computerMove = "";
+		let result = "";
 
-		for(counter = 1; counter < 6; counter ++)
-			let randomNumber = Math.floor(Math.random() * 2);
-				switch (randomNumber){
-					case 1:
-						computerMove = "rock";
-					break;
-					case 2: 
-						computerMove = "paper";
-					break;
-					case 3;
-						computerMove = "scissors";
-					break;
-				}
-		playerMove = window.prompt("What's your move?");
-		console.log(computerPlay(playerMove, computerMove));
+for(counter = 1; counter < 6; counter ++){
+	playerMove = window.prompt("What's your move?");
+	computerMove = computerPlay();
+	result = playRound(playerMove, computerMove);
+		switch(result){
+			case "win":
+				userScore++;
+				console.log (`You chose ${playerMove} and computer chose ${computerMove}. You win!`);
+				break;
+			case "tie": 
+				console.log(`You chose ${playerMove} and computer chose ${computerMove}. Its a tie!`);
+				break;
+			case "lose":
+				computerScore++;
+				console.log(`Computer chose ${computerMove} and that beats${playerMove}. You lose!`);
+				break;
+			}
 	}
+	if(userScore > computerScore){
+		console.log(`Your final score: ${userScore} Computer's score: ${computerScore} You win!`);
+	} else if (userScore === computerScore){
+		console.log(`Your final score: ${userScore} Computer's score: ${computerScore} It's a tie`);
+	}
+	else if (userScore < computerScore){
+		console.log(`Your final score: ${userScore} Computer's score: ${computerScore} You lose!`);
+	}
+}
 
-	game();
+game();
+
 </script>
