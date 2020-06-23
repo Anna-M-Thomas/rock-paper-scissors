@@ -1,6 +1,7 @@
 <script>
 
 	function computerPlay(playerSelection, computerSelection){
+
 		if(typeof playerSelection !== 'string' || typeof computerSelection !== 'string' ){
 			return "Bad input, try again";
 		}
@@ -14,5 +15,31 @@
 		else {
 			return `You lose! ${computerSelection} beats ${playerSelection}.`;
 		}
+
 	}
+
+	function game () {
+		let userScore = 0;
+		let computerScore = 0;
+		let playerMove = "";
+		let computerMove = "";
+
+		for(counter = 1; counter < 6; counter ++)
+			let randomNumber = Math.floor(Math.random() * 2);
+				switch (randomNumber){
+					case 1:
+						computerMove = "rock";
+					break;
+					case 2: 
+						computerMove = "paper";
+					break;
+					case 3;
+						computerMove = "scissors";
+					break;
+				}
+		playerMove = window.prompt("What's your move?");
+		console.log(computerPlay(playerMove, computerMove));
+	}
+
+	game();
 </script>
